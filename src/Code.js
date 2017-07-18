@@ -10,7 +10,7 @@ function displayMenu() {
 
 // eslint-disable-next-line no-unused-vars
 function makeFormOffline() {
-  // todo
+  FormApp.getUi().alert("Hello from Forms Offline Addon!");
 }
 
 // eslint-disable-next-line no-unused-vars
