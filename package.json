@@ -13,7 +13,6 @@
     "eslint-plugin-import": "^2.7.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
-    "prettier": "^1.5.3",
     "prettier-eslint-cli": "^4.1.1"
   },
   "scripts": {
@@ -25,7 +24,10 @@
     "deploy": "gapps upload"
   },
   "lint-staged": {
-    "*.js": ["prettier-eslint \"src/**/*.js\" --write", "git add"]
+    "*.js": [
+      "prettier-eslint \"src/**/*.js\" --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "eslint-plugin-prettier": "^2.1.2"
