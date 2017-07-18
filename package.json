@@ -3,9 +3,12 @@
   "version": "0.1",
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.7.0"
   },
   "scripts": {
