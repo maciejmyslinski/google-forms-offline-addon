@@ -14,6 +14,14 @@ function makeFormOffline() {
 }
 
 // eslint-disable-next-line no-unused-vars
+function describeActiveForm() {
+  const activeForm = FormApp.getActiveForm();
+  return {
+    canEditResponse: activeForm.canEditResponse(),
+  };
+}
+
+// eslint-disable-next-line no-unused-vars
 function onOpen() {
   displayMenu();
 }
