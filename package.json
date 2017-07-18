@@ -24,10 +24,7 @@
     "deploy": "gapps upload"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint \"src/**/*.js\" --write",
-      "git add"
-    ]
+    "*.js": ["prettier-eslint \"**/*.js\" --write", "git add"]
   },
   "dependencies": {
     "eslint-plugin-prettier": "^2.1.2"
