@@ -17,3 +17,8 @@ function makeFormOffline() {
 function onOpen() {
   displayMenu();
 }
+
+// eslint-disable-next-line no-unused-vars
+function onInstall() {
+  onOpen();
+}
