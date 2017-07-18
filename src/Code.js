@@ -1,3 +1,3 @@
-function myFunction() {
+"use strict";
 
-}
+function myFunction() {}

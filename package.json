@@ -2,11 +2,14 @@
   "name": "google-forms-offline-addon",
   "version": "0.1",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.7.0"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "babel src-es6 -d src"
   }
 }
