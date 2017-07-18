@@ -1,6 +1,6 @@
 {
   "name": "google-forms-offline-addon",
-  "version": "0.1",
+  "version": "0.1.0",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
@@ -16,9 +16,12 @@
     "prettier": "^1.5.3"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint src",
+    "prebuild": "yarn lint",
     "build": "babel src -d build",
-    "precommit": "lint-staged"
+    "precommit": "yarn lint-staged",
+    "predeploy": "yarn build",
+    "deploy": "gapps upload"
   },
   "lint-staged": {
     "*.js": ["prettier --write", "git add"]
