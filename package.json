@@ -4,6 +4,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
     "eslint": "^3.19.0",
@@ -29,7 +30,10 @@
     "clear": "rimraf build/**"
   },
   "lint-staged": {
-    "*.js": ["prettier-eslint \"**/*.js\" --write", "git add"]
+    "*.js": [
+      "prettier-eslint \"**/*.js\" --write",
+      "git add"
+    ]
   },
   "dependencies": {}
 }
