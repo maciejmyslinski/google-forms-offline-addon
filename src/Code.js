@@ -1,5 +1,4 @@
 // @flow
-/* global FormApp */
 
 function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();

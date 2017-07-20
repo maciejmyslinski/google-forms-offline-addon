@@ -10,6 +10,7 @@
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-googleappsscript": "^1.0.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-prettier": "^2.1.2",
     "husky": "^0.14.3",
