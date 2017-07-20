@@ -16,15 +16,17 @@
     "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
     "prettier-eslint-cli": "^4.1.1",
+    "rimraf": "^2.6.1",
     "webpack": "^3.3.0"
   },
   "scripts": {
     "lint": "eslint src",
-    "prebuild": "yarn lint",
+    "prebuild": "yarn lint && yarn clear",
     "build": "webpack",
     "precommit": "yarn lint-staged",
     "predeploy": "yarn build",
-    "deploy": "gapps upload"
+    "deploy": "gapps upload",
+    "clear": "rimraf build/**"
   },
   "lint-staged": {
     "*.js": ["prettier-eslint \"**/*.js\" --write", "git add"]
