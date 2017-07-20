@@ -24,16 +24,14 @@
     "lint": "eslint src",
     "prebuild": "yarn lint && yarn clear",
     "build": "webpack",
+    "build:watch": "webpack -w",
     "precommit": "yarn lint-staged",
     "predeploy": "yarn build",
     "deploy": "gapps upload",
     "clear": "rimraf build/**"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint \"**/*.js\" --write",
-      "git add"
-    ]
+    "*.js": ["prettier-eslint \"**/*.js\" --write", "git add"]
   },
   "dependencies": {}
 }
