@@ -21,16 +21,13 @@
   "scripts": {
     "lint": "eslint src",
     "prebuild": "yarn lint",
-    "build": "babel src -d build",
+    "build": "webpack",
     "precommit": "yarn lint-staged",
     "predeploy": "yarn build",
     "deploy": "gapps upload"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint \"**/*.js\" --write",
-      "git add"
-    ]
+    "*.js": ["prettier-eslint \"**/*.js\" --write", "git add"]
   },
   "dependencies": {}
 }
