@@ -1,10 +1,14 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: { app: './src/index.js', makeFormOffline: './src/makeFormOffline' },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'Code.js',
+    filename: '[name].js',
+    library: '[name]',
+    libraryTarget: 'assign',
   },
   module: {
     rules: [
@@ -19,4 +23,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [new CopyWebpackPlugin([{ from: 'src/Code.js' }]), new CleanWebpackPlugin(['build'])],
 };
