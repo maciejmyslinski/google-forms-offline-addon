@@ -8,7 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
     library: '[name]',
-    libraryTarget: 'assign',
   },
   module: {
     rules: [

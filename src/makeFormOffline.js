@@ -1,5 +1,5 @@
 // @flow
 
-export default function makeFormOffline() {
+export function makeFormOffline() {
   FormApp.getUi().alert('Hello from Forms Offline Addon!');
 }
