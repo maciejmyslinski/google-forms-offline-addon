@@ -5,4 +5,7 @@ module.exports = {
   env: {
     'googleappsscript/googleappsscript': true,
   },
+  rules: {
+    'import/prefer-default-export': 'off',
+  },
 };
