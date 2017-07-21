@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-unused-vars
-export function describeActiveForm() {
+function describeActiveForm() {
   const activeForm = FormApp.getActiveForm();
   const formDescription: {
     canEditResponse: boolean,
@@ -51,7 +51,6 @@ export function describeActiveForm() {
   return formDescription;
 }
 
-// eslint-disable-next-line no-unused-vars
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
