@@ -16,6 +16,8 @@
     "eslint-plugin-googleappsscript": "^1.0.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-prettier": "^2.1.2",
+    "google-auth-library": "^0.10.0",
+    "googleapis": "^20.1.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
     "node-google-apps-script": "^1.1.5",
