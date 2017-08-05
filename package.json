@@ -34,13 +34,10 @@
     "build:watch": "webpack -w",
     "precommit": "yarn lint-staged",
     "predeploy": "yarn build",
-    "deploy": "gapps upload"
+    "deploy": "babel-node deploy.js"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint \"**/*.js\" --write",
-      "git add"
-    ]
+    "*.js": ["prettier-eslint \"**/*.js\" --write", "git add"]
   },
   "dependencies": {}
 }
