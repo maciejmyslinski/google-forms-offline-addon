@@ -117,6 +117,9 @@ function describeCheckboxItem(checkboxItem) {
     points: integer,
     hasOtherOption: boolean,
     isRequired: boolean,
+    choices: array,
+    feedbackForCorrect: object,
+    feedbackForIncorrect: object,
   } = {
     helpText: checkboxItem.getHelpText(),
     id: checkboxItem.getId(),
