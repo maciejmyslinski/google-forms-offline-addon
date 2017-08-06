@@ -80,8 +80,6 @@ function updateFiles(currentFiles) {
 
 async function deploy() {
   try {
-    /* eslint-disable no-unreachable */
-    throw new Error('red build please');
     const authResponse = await authorize();
     const accessToken = authResponse.data.access_token;
     const getFilesResponse = await getFiles(accessToken);
@@ -90,7 +88,8 @@ async function deploy() {
     await uploadFiles(files, accessToken);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error(error);
+    console.warn(error);
+    process.exitCode = 1;
   }
 }
 
