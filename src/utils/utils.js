@@ -114,6 +114,7 @@ function describeCheckboxItem(checkboxItem) {
     id: number,
     index: number,
     title: string,
+    type: string,
     points: integer,
     hasOtherOption: boolean,
     isRequired: boolean,
@@ -125,6 +126,7 @@ function describeCheckboxItem(checkboxItem) {
     id: checkboxItem.getId(),
     index: checkboxItem.getIndex(),
     title: checkboxItem.getTitle(),
+    type: checkboxItem.getType(),
     points: checkboxItem.getPoints(),
     hasOtherOption: checkboxItem.hasOtherOption(),
     isRequired: checkboxItem.isRequired(),
@@ -133,6 +135,33 @@ function describeCheckboxItem(checkboxItem) {
     feedbackForIncorrect: describeQuizFeedback(checkboxItem.getFeedbackForIncorrect()),
   };
   return checkboxDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/date-item
+// eslint-disable-next-line no-unused-vars
+function describeDateItem(dateItem) {
+  const dateItemDescription: {
+    generalFeedback: object,
+    helpText: string,
+    id: number,
+    index: number,
+    points: number,
+    title: string,
+    type: string,
+    includesYear: boolean,
+    isRequired: boolean,
+  } = {
+    generalFeedback: describeQuizFeedback(dateItem.getGeneralFeedback()),
+    helpText: dateItem.getHelpText(),
+    id: dateItem.getId(),
+    index: dateItem.getIndex(),
+    points: dateItem.getPoints(),
+    title: dateItem.getTitle(),
+    type: dateItem.getType(),
+    includesYear: dateItem.includesYear(),
+    isRequired: dateItem.isRequired(),
+  };
+  return dateItemDescription;
 }
 
 export function displayMenu() {
