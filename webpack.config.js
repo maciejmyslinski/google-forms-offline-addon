@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: { app: './src/index.js', makeFormOffline: './src/makeFormOffline' },
+  entry: { app: './src/index.js' },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
