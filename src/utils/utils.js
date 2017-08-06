@@ -29,7 +29,7 @@ function describeActiveForm() {
     canEditResponse: activeForm.canEditResponse(),
     collectsEmail: activeForm.collectsEmail(),
     confirmationMessage: activeForm.getConfirmationMessage(),
-    closedFormMessage: activeForm.getCustomClosedFormMessage(),
+    customClosedFormMessage: activeForm.getCustomClosedFormMessage(),
     description: activeForm.getDescription(),
     destinationId: activeForm.getDestinationId(),
     editUrl: activeForm.getEditUrl(),
@@ -49,6 +49,11 @@ function describeActiveForm() {
     shortenFormUrl: activeForm.shortenFormUrl(),
   };
   return formDescription;
+}
+
+// eslint-disable-next-line no-unused-vars
+function makeFormOffline() {
+  describeActiveForm();
 }
 
 export function displayMenu() {
