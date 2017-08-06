@@ -86,9 +86,9 @@ async function deploy() {
     const currentFiles = getFilesResponse.data.files;
     const files = updateFiles(currentFiles);
     await uploadFiles(files, accessToken);
+    throw new Error('red build please');
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
+    throw error;
   }
 }
 
