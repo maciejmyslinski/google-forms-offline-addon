@@ -164,6 +164,31 @@ function describeDateItem(dateItem) {
   return dateItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/duration-item
+// eslint-disable-next-line no-unused-vars
+function describeDurationItem(durationItem) {
+  const durationItemDescription: {
+    generalFeedback: object,
+    helpText: string,
+    id: number,
+    index: number,
+    points: number,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    generalFeedback: describeQuizFeedback(durationItem.getGeneralFeedback()),
+    helpText: durationItem.getHelpText(),
+    id: durationItem.getId(),
+    index: durationItem.getIndex(),
+    points: durationItem.getPoints(),
+    title: durationItem.getTitle(),
+    type: durationItem.getType(),
+    isRequired: durationItem.isRequired(),
+  };
+  return durationItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
