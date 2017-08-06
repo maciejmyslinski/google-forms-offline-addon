@@ -56,6 +56,82 @@ function makeFormOffline() {
   describeActiveForm();
 }
 
+// see https://developers.google.com/apps-script/reference/forms/page-break-item
+function describePageBreakItem(pageBreakItem) {
+  const pageBreakItemDescription: {
+    goToPage: number,
+    helpText: string,
+    id: number,
+    index: number,
+    pageNavigationType: 'CONTINUE' | 'GO_TO_PAGE' | 'RESTART' | 'SUBMIT',
+    title: string,
+    type: string,
+  } = {
+    goToPage: pageBreakItem.getGoToPage().getId(),
+    helpText: pageBreakItem.getHelpText(),
+    id: pageBreakItem.getId(),
+    index: pageBreakItem.getIndex(),
+    pageNavigationType: pageBreakItem.getPageNavigationType(),
+    title: pageBreakItem.getTitle(),
+    type: pageBreakItem.getType(),
+  };
+  return pageBreakItemDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/choice
+function describeChoice(choice) {
+  const choiceDescription: {
+    gotoPage: object,
+    pageNavigationType: 'CONTINUE' | 'GO_TO_PAGE' | 'RESTART' | 'SUBMIT',
+    value: string,
+    isCorrectAnswer: boolean,
+  } = {
+    gotoPage: describePageBreakItem(choice.getGotoPage()),
+    pageNavigationType: choice.getPageNavigationType(),
+    value: choice.getValue(),
+    isCorrectAnswer: choice.isCorrectAnswer(),
+  };
+  return choiceDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/quiz-feedback
+function describeQuizFeedback(quizFeedback) {
+  const quizFeedbackDescription: {
+    text: string,
+    linkUrls: Array<string>,
+  } = {
+    text: quizFeedback.getText(),
+    linkUrls: quizFeedback.getLinkUrls(),
+  };
+  return quizFeedbackDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/checkbox-item
+// eslint-disable-next-line no-unused-vars
+function describeCheckboxItem(checkboxItem) {
+  const checkboxDescription: {
+    helpText: string,
+    id: number,
+    index: number,
+    title: string,
+    points: integer,
+    hasOtherOption: boolean,
+    isRequired: boolean,
+  } = {
+    helpText: checkboxItem.getHelpText(),
+    id: checkboxItem.getId(),
+    index: checkboxItem.getIndex(),
+    title: checkboxItem.getTitle(),
+    points: checkboxItem.getPoints(),
+    hasOtherOption: checkboxItem.hasOtherOption(),
+    isRequired: checkboxItem.isRequired(),
+    choices: checkboxItem.getChoices().reduce(choice => describeChoice(choice)),
+    feedbackForCorrect: describeQuizFeedback(checkboxItem.getFeedbackForCorrect()),
+    feedbackForIncorrect: describeQuizFeedback(checkboxItem.getFeedbackForIncorrect()),
+  };
+  return checkboxDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
