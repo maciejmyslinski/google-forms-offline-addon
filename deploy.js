@@ -47,19 +47,7 @@ function authorize() {
   );
 }
 
-function uploadFiles(accessToken) {
-  const files = [
-    {
-      name: 'Code.js',
-      type: 'server_js',
-      source: fs.readFileSync(path.join('build', 'Code.js'), 'utf-8'),
-    },
-    {
-      name: 'app.js',
-      type: 'server_js',
-      source: fs.readFileSync(path.join('build', 'app.js'), 'utf-8'),
-    },
-  ];
+function uploadFiles(files, accessToken) {
   return axios({
     method: 'patch',
     url: `https://www.googleapis.com/upload/drive/v3/files/${FILE_ID}`,
@@ -67,18 +55,39 @@ function uploadFiles(accessToken) {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/vnd.google-apps.script+json',
-      'Content-Length': Buffer.byteLength(JSON.stringify({ files }), 'utf-8'),
     },
-    params: querystring.stringify({ uploadType: 'media' }),
   });
+}
+
+function getFiles(accessToken) {
+  return axios({
+    method: 'get',
+    url: `https://www.googleapis.com/drive/v3/files/${FILE_ID}/export`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: { mimeType: 'application/vnd.google-apps.script+json' },
+  });
+}
+
+function updateFiles(currentFiles) {
+  const codeFile = currentFiles.find(file => file.name === 'Code');
+  codeFile.source = fs.readFileSync(path.join('build', 'Code.js'), 'utf-8');
+  const appFile = currentFiles.find(file => file.name === 'app');
+  appFile.source = fs.readFileSync(path.join('build', 'app.js'), 'utf-8');
+  return [codeFile, appFile];
 }
 
 async function deploy() {
   try {
     const authResponse = await authorize();
     const accessToken = authResponse.data.access_token;
-    uploadFiles(accessToken);
+    const getFilesResponse = await getFiles(accessToken);
+    const currentFiles = getFilesResponse.data.files;
+    const files = updateFiles(currentFiles);
+    await uploadFiles(files, accessToken);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 }

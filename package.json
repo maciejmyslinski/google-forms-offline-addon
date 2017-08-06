@@ -37,7 +37,10 @@
     "deploy": "babel-node deploy.js"
   },
   "lint-staged": {
-    "*.js": ["prettier-eslint \"**/*.js\" --write", "git add"]
+    "*.js": [
+      "prettier-eslint \"**/*.js\" --write",
+      "git add"
+    ]
   },
   "dependencies": {}
 }
