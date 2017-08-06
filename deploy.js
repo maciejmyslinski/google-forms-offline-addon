@@ -89,7 +89,8 @@ async function deploy() {
     const files = updateFiles(currentFiles);
     await uploadFiles(files, accessToken);
   } catch (error) {
-    throw error;
+    // eslint-disable-next-line no-console
+    console.error(error);
   }
 }
 
