@@ -17,6 +17,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - deploy:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              yarn deploy
-            fi
+            yarn deploy
