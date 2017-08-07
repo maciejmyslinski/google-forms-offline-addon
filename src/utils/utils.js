@@ -164,6 +164,13 @@ function describeDateItem(dateItem) {
   return dateItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/date-time-item
+// eslint-disable-next-line no-unused-vars
+function describeDateTimeItem(dateTimeItem) {
+  // dateTimeItem looks exactly the same as dateItem
+  return describeDateItem(dateTimeItem);
+}
+
 // see https://developers.google.com/apps-script/reference/forms/duration-item
 // eslint-disable-next-line no-unused-vars
 function describeDurationItem(durationItem) {
