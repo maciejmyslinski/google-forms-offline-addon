@@ -196,6 +196,31 @@ function describeDurationItem(durationItem) {
   return durationItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/grid-item
+// eslint-disable-next-line no-unused-vars
+function describeGridItem(gridItem) {
+  const gridItemDescription: {
+    columns: Array<string>,
+    helpText: string,
+    id: number,
+    index: number,
+    rows: Array<string>,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    columns: gridItem.getColumns(),
+    helpText: gridItem.getHelpText(),
+    id: gridItem.getId(),
+    index: gridItem.getIndex(),
+    rows: gridItem.getRows(),
+    title: gridItem.getTitle(),
+    type: gridItem.getType(),
+    isRequired: gridItem.isRequired(),
+  };
+  return gridItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
