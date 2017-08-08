@@ -264,6 +264,35 @@ function describeImageItem(imageItem) {
   return imageItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/list-item
+// eslint-disable-next-line no-unused-vars
+function describeListItem(listItem) {
+  const listItemDescription: {
+    choices: Array<object>,
+    feedbackForCorrect: object,
+    feedbackForIncorrect: object,
+    helpText: string,
+    id: number,
+    index: number,
+    points: number,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    choices: listItem.getChoices().reduce(choice => describeChoice(choice)),
+    feedbackForCorrect: describeQuizFeedback(listItem.getFeedbackForCorrect()),
+    feedbackForIncorrect: describeQuizFeedback(listItem.getFeedbackForIncorrect()),
+    helpText: listItem.getHelpText(),
+    id: listItem.getId(),
+    index: listItem.getIndex(),
+    points: listItem.getPoints(),
+    title: listItem.getTitle(),
+    type: listItem.getType(),
+    isRequired: listItem.isRequired(),
+  };
+  return listItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
