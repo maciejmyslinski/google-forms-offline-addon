@@ -221,6 +221,49 @@ function describeGridItem(gridItem) {
   return gridItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/base/blob
+function describeBlob(blob) {
+  const blobDescription: {
+    bytes: Array,
+    contentType: string,
+    data: string,
+    name: string,
+    isGoogleType: boolean,
+  } = {
+    bytes: blob.getBytes(),
+    contentType: blob.getContentType(),
+    data: blob.getDataAsString(),
+    name: blob.getName(),
+    isGoogleType: blob.isGoogleType(),
+  };
+  return blobDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/image-item
+// eslint-disable-next-line no-unused-vars
+function describeImageItem(imageItem) {
+  const imageItemDescription: {
+    aligment: string,
+    helpText: string,
+    id: number,
+    image: object,
+    index: number,
+    title: string,
+    type: string,
+    width: number,
+  } = {
+    aligment: imageItem.getAligment(),
+    helpText: imageItem.getHelpText(),
+    id: imageItem.getId(),
+    image: describeBlob(imageItem.getImage()),
+    index: imageItem.getIndex(),
+    title: imageItem.getTitle(),
+    type: imageItem.getType(),
+    width: imageItem.getWidth(),
+  };
+  return imageItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
