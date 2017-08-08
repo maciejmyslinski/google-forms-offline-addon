@@ -318,14 +318,35 @@ function describeMultipleChoiceItem(multipleChoiceItem) {
   return multipleChoiceItemDescription;
 }
 
-// see https://developers.google.com/apps-script/reference/forms/scale-item
+// see https://developers.google.com/apps-script/reference/forms/paragraph-text-item
 // eslint-disable-next-line no-unused-vars
-function describeScaleItem(scaleItem) {
-  const scaleItemDescription: {
+function describeParagraphTextItem(paragraphTextItem) {
+  const paragraphTextItemDescription: {
     generalFeedback: object,
     helpText: string,
     id: number,
     index: number,
+    points: number,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    generalFeedback: describeQuizFeedback(paragraphTextItem.getGeneralFeedback()),
+    helpText: paragraphTextItem.getHelpText(),
+    id: paragraphTextItem.getId(),
+    index: paragraphTextItem.getIndex(),
+    points: paragraphTextItem.getPoints(),
+    title: paragraphTextItem.getTitle(),
+    type: paragraphTextItem.getType(),
+    isRequired: paragraphTextItem.isRequired(),
+  };
+  return paragraphTextItemDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/scale-item
+// eslint-disable-next-line no-unused-vars
+function describeScaleItem(scaleItem) {
+  const scaleItemDescription: {
     leftLabel: string,
     lowerBound: number,
     points: number,
