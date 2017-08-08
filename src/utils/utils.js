@@ -130,7 +130,7 @@ function describeCheckboxItem(checkboxItem) {
     points: checkboxItem.getPoints(),
     hasOtherOption: checkboxItem.hasOtherOption(),
     isRequired: checkboxItem.isRequired(),
-    choices: checkboxItem.getChoices().reduce(choice => describeChoice(choice)),
+    choices: checkboxItem.getChoices().map(choice => describeChoice(choice)),
     feedbackForCorrect: describeQuizFeedback(checkboxItem.getFeedbackForCorrect()),
     feedbackForIncorrect: describeQuizFeedback(checkboxItem.getFeedbackForIncorrect()),
   };
@@ -279,7 +279,7 @@ function describeListItem(listItem) {
     type: string,
     isRequired: boolean,
   } = {
-    choices: listItem.getChoices().reduce(choice => describeChoice(choice)),
+    choices: listItem.getChoices().map(choice => describeChoice(choice)),
     feedbackForCorrect: describeQuizFeedback(listItem.getFeedbackForCorrect()),
     feedbackForIncorrect: describeQuizFeedback(listItem.getFeedbackForIncorrect()),
     helpText: listItem.getHelpText(),
@@ -291,6 +291,37 @@ function describeListItem(listItem) {
     isRequired: listItem.isRequired(),
   };
   return listItemDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/multiple-choice-item
+// eslint-disable-next-line no-unused-vars
+function describeMultipleChoiceItem(multipleChoiceItem) {
+  const multipleChoiceItemDescription: {
+    choices: Array<object>,
+    feedbackForCorrect: object,
+    feedbackForIncorrect: object,
+    helpText: string,
+    id: number,
+    index: number,
+    points: number,
+    title: string,
+    type: string,
+    hasOtherOption: boolean,
+    isRequired: boolean,
+  } = {
+    choices: multipleChoiceItem.getChoices().map(choice => describeChoice(choice)),
+    feedbackForCorrect: describeQuizFeedback(multipleChoiceItem.getFeedbackForCorrect()),
+    feedbackForIncorrect: describeQuizFeedback(multipleChoiceItem.getFeedbackForIncorrect()),
+    helpText: multipleChoiceItem.getHelpText(),
+    id: multipleChoiceItem.getId(),
+    index: multipleChoiceItem.getIndex(),
+    points: multipleChoiceItem.getPoints(),
+    title: multipleChoiceItem.getTitle(),
+    type: multipleChoiceItem.getType(),
+    hasOtherOption: multipleChoiceItem.hasOtherOption(),
+    isRequired: multipleChoiceItem.isRequired(),
+  };
+  return multipleChoiceItemDescription;
 }
 
 export function displayMenu() {
