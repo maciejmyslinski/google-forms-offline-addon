@@ -401,6 +401,31 @@ function describeTextItem(textItem) {
   return textItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/time-item
+// eslint-disable-next-line no-unused-vars
+function describeTimeItem(timeItem) {
+  const timeItemDescription: {
+    generalFeedback: object,
+    helpText: string,
+    id: number,
+    index: number,
+    points: number,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    generalFeedback: describeQuizFeedback(timeItem.getGeneralFeedback()),
+    helpText: timeItem.getHelpText(),
+    id: timeItem.getId(),
+    index: timeItem.getIndex(),
+    points: timeItem.getPoints(),
+    title: timeItem.getTitle(),
+    type: timeItem.getType(),
+    isRequired: timeItem.isRequired(),
+  };
+  return timeItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
