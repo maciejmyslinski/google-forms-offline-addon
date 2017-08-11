@@ -426,6 +426,31 @@ function describeTimeItem(timeItem) {
   return timeItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/checkbox-grid-item
+// eslint-disable-next-line no-unused-vars
+function describeCheckboxGridItem(checkboxGridItem) {
+  const checkboxGridItemDescription: {
+    columns: Array<string>,
+    helpText: string,
+    id: number,
+    index: number,
+    rows: Array<string>,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    columns: checkboxGridItem.getColumns(),
+    helpText: checkboxGridItem.getHelpText(),
+    id: checkboxGridItem.getId(),
+    index: checkboxGridItem.getIndex(),
+    rows: checkboxGridItem.getRows(),
+    title: checkboxGridItem.getTitle(),
+    type: checkboxGridItem.getType(),
+    isRequired: checkboxGridItem.isRequired(),
+  };
+  return checkboxGridItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
