@@ -376,6 +376,31 @@ function describeSectionHeaderItem(sectionHeaderItem) {
   return sectionHeaderItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/text-item
+// eslint-disable-next-line no-unused-vars
+function describeTextItem(textItem) {
+  const textItemDescription: {
+    generalFeedback: object,
+    helpText: string,
+    id: number,
+    index: number,
+    points: number,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    generalFeedback: describeQuizFeedback(textItem.getGeneralFeedback()),
+    helpText: textItem.getHelpText(),
+    id: textItem.getId(),
+    index: textItem.getIndex(),
+    points: textItem.getPoints(),
+    title: textItem.getTitle(),
+    type: textItem.getType(),
+    isRequired: textItem.isRequired(),
+  };
+  return textItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
