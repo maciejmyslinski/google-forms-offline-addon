@@ -357,6 +357,25 @@ function describeScaleItem(scaleItem) {
   return scaleItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/scale-item
+// eslint-disable-next-line no-unused-vars
+function describeSectionHeaderItem(sectionHeaderItem) {
+  const sectionHeaderItemDescription: {
+    helpText: string,
+    id: number,
+    index: number,
+    title: string,
+    type: string,
+  } = {
+    helpText: sectionHeaderItem.getHelpText(),
+    id: sectionHeaderItem.getId(),
+    index: sectionHeaderItem.getIndex(),
+    title: sectionHeaderItem.getTitle(),
+    type: sectionHeaderItem.getType(),
+  };
+  return sectionHeaderItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
