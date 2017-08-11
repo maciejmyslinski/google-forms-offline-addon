@@ -324,6 +324,39 @@ function describeMultipleChoiceItem(multipleChoiceItem) {
   return multipleChoiceItemDescription;
 }
 
+// see https://developers.google.com/apps-script/reference/forms/scale-item
+// eslint-disable-next-line no-unused-vars
+function describeScaleItem(scaleItem) {
+  const scaleItemDescription: {
+    generalFeedback: object,
+    helpText: string,
+    id: number,
+    index: number,
+    leftLabel: string,
+    lowerBound: number,
+    points: number,
+    rightLabel: string,
+    title: string,
+    type: string,
+    upperBound: number,
+    isRequired: boolean,
+  } = {
+    generalFeedback: describeQuizFeedback(scaleItem.getGeneralFeedback()),
+    helpText: scaleItem.getHelpText(),
+    id: scaleItem.getId(),
+    index: scaleItem.getIndex(),
+    leftLabel: scaleItem.getLeftLabel(),
+    lowerBound: scaleItem.getLowerBound(),
+    points: scaleItem.getPoints(),
+    rightLabel: scaleItem.getRightLabel(),
+    title: scaleItem.getTitle(),
+    type: scaleItem.getType(),
+    upperBound: scaleItem.getUpperBound(),
+    isRequired: scaleItem.isRequired(),
+  };
+  return scaleItemDescription;
+}
+
 export function displayMenu() {
   FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
