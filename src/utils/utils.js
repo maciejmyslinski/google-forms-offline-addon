@@ -357,7 +357,7 @@ function describeScaleItem(scaleItem) {
   return scaleItemDescription;
 }
 
-// see https://developers.google.com/apps-script/reference/forms/scale-item
+// see https://developers.google.com/apps-script/reference/forms/section-header-item
 // eslint-disable-next-line no-unused-vars
 function describeSectionHeaderItem(sectionHeaderItem) {
   const sectionHeaderItemDescription: {
