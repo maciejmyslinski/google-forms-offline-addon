@@ -497,8 +497,7 @@ function describeItem(item) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-function describeActiveForm() {
+export function describeActiveForm() {
   const activeForm = FormApp.getActiveForm();
   return {
     ...describeForm(activeForm),
