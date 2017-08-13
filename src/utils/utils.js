@@ -1,13 +1,12 @@
 // @flow
 
-// eslint-disable-next-line no-unused-vars
-function describeActiveForm() {
-  const activeForm = FormApp.getActiveForm();
+// see https://developers.google.com/apps-script/reference/forms/form
+function describeForm(form) {
   const formDescription: {
     canEditResponse: boolean,
     collectsEmail: boolean,
     confirmationMessage: string,
-    closedFormMessage: string,
+    customClosedFormMessage: string,
     description: string,
     destinationId: string,
     editUrl: string,
@@ -26,34 +25,29 @@ function describeActiveForm() {
     requiresLogin: boolean,
     shortenFormUrl: string,
   } = {
-    canEditResponse: activeForm.canEditResponse(),
-    collectsEmail: activeForm.collectsEmail(),
-    confirmationMessage: activeForm.getConfirmationMessage(),
-    customClosedFormMessage: activeForm.getCustomClosedFormMessage(),
-    description: activeForm.getDescription(),
-    destinationId: activeForm.getDestinationId(),
-    editUrl: activeForm.getEditUrl(),
-    editors: activeForm.getEditors().map(user => user.getEmail()),
-    id: activeForm.getId(),
-    publishedUrl: activeForm.getPublishedUrl(),
-    shuffleQuestions: activeForm.getShuffleQuestions(),
-    summaryUrl: activeForm.getSummaryUrl(),
-    title: activeForm.getTitle(),
-    hasLimitOneResponsePerUser: activeForm.hasLimitOneResponsePerUser(),
-    hasProgressBar: activeForm.hasProgressBar(),
-    hasResponseAgainLink: activeForm.hasResponseAgainLink(),
-    isAcceptingResponses: activeForm.isAcceptingResponses(),
-    isPublishingSummary: activeForm.isPublishingSummary(),
-    isQuiz: activeForm.isQuiz(),
-    requiresLogin: activeForm.requiresLogin(),
-    shortenFormUrl: activeForm.shortenFormUrl(),
+    canEditResponse: form.canEditResponse(),
+    collectsEmail: form.collectsEmail(),
+    confirmationMessage: form.getConfirmationMessage(),
+    customClosedFormMessage: form.getCustomClosedFormMessage(),
+    description: form.getDescription(),
+    destinationId: form.getDestinationId(),
+    editUrl: form.getEditUrl(),
+    editors: form.getEditors().map(user => user.getEmail()),
+    id: form.getId(),
+    publishedUrl: form.getPublishedUrl(),
+    shuffleQuestions: form.getShuffleQuestions(),
+    summaryUrl: form.getSummaryUrl(),
+    title: form.getTitle(),
+    hasLimitOneResponsePerUser: form.hasLimitOneResponsePerUser(),
+    hasProgressBar: form.hasProgressBar(),
+    hasResponseAgainLink: form.hasResponseAgainLink(),
+    isAcceptingResponses: form.isAcceptingResponses(),
+    isPublishingSummary: form.isPublishingSummary(),
+    isQuiz: form.isQuiz(),
+    requiresLogin: form.requiresLogin(),
+    shortenFormUrl: form.shortenFormUrl(),
   };
   return formDescription;
-}
-
-// eslint-disable-next-line no-unused-vars
-function makeFormOffline() {
-  describeActiveForm();
 }
 
 // see https://developers.google.com/apps-script/reference/forms/page-break-item
@@ -107,7 +101,6 @@ function describeQuizFeedback(quizFeedback) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/checkbox-item
-// eslint-disable-next-line no-unused-vars
 function describeCheckboxItem(checkboxItem) {
   const checkboxDescription: {
     helpText: string,
@@ -138,7 +131,6 @@ function describeCheckboxItem(checkboxItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/date-item
-// eslint-disable-next-line no-unused-vars
 function describeDateItem(dateItem) {
   const dateItemDescription: {
     generalFeedback: object,
@@ -165,14 +157,12 @@ function describeDateItem(dateItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/date-time-item
-// eslint-disable-next-line no-unused-vars
 function describeDateTimeItem(dateTimeItem) {
   // dateTimeItem looks exactly the same as dateItem
   return describeDateItem(dateTimeItem);
 }
 
 // see https://developers.google.com/apps-script/reference/forms/duration-item
-// eslint-disable-next-line no-unused-vars
 function describeDurationItem(durationItem) {
   const durationItemDescription: {
     generalFeedback: object,
@@ -197,7 +187,6 @@ function describeDurationItem(durationItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/grid-item
-// eslint-disable-next-line no-unused-vars
 function describeGridItem(gridItem) {
   const gridItemDescription: {
     columns: Array<string>,
@@ -240,7 +229,6 @@ function describeBlob(blob) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/image-item
-// eslint-disable-next-line no-unused-vars
 function describeImageItem(imageItem) {
   const imageItemDescription: {
     aligment: string,
@@ -265,7 +253,6 @@ function describeImageItem(imageItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/list-item
-// eslint-disable-next-line no-unused-vars
 function describeListItem(listItem) {
   const listItemDescription: {
     choices: Array<object>,
@@ -294,7 +281,6 @@ function describeListItem(listItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/multiple-choice-item
-// eslint-disable-next-line no-unused-vars
 function describeMultipleChoiceItem(multipleChoiceItem) {
   const multipleChoiceItemDescription: {
     choices: Array<object>,
@@ -324,14 +310,34 @@ function describeMultipleChoiceItem(multipleChoiceItem) {
   return multipleChoiceItemDescription;
 }
 
-// see https://developers.google.com/apps-script/reference/forms/scale-item
+// see https://developers.google.com/apps-script/reference/forms/paragraph-text-item
 // eslint-disable-next-line no-unused-vars
-function describeScaleItem(scaleItem) {
-  const scaleItemDescription: {
+function describeParagraphTextItem(paragraphTextItem) {
+  const paragraphTextItemDescription: {
     generalFeedback: object,
     helpText: string,
     id: number,
     index: number,
+    points: number,
+    title: string,
+    type: string,
+    isRequired: boolean,
+  } = {
+    generalFeedback: describeQuizFeedback(paragraphTextItem.getGeneralFeedback()),
+    helpText: paragraphTextItem.getHelpText(),
+    id: paragraphTextItem.getId(),
+    index: paragraphTextItem.getIndex(),
+    points: paragraphTextItem.getPoints(),
+    title: paragraphTextItem.getTitle(),
+    type: paragraphTextItem.getType(),
+    isRequired: paragraphTextItem.isRequired(),
+  };
+  return paragraphTextItemDescription;
+}
+
+// see https://developers.google.com/apps-script/reference/forms/scale-item
+function describeScaleItem(scaleItem) {
+  const scaleItemDescription: {
     leftLabel: string,
     lowerBound: number,
     points: number,
@@ -358,7 +364,6 @@ function describeScaleItem(scaleItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/section-header-item
-// eslint-disable-next-line no-unused-vars
 function describeSectionHeaderItem(sectionHeaderItem) {
   const sectionHeaderItemDescription: {
     helpText: string,
@@ -377,7 +382,6 @@ function describeSectionHeaderItem(sectionHeaderItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/text-item
-// eslint-disable-next-line no-unused-vars
 function describeTextItem(textItem) {
   const textItemDescription: {
     generalFeedback: object,
@@ -402,7 +406,6 @@ function describeTextItem(textItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/time-item
-// eslint-disable-next-line no-unused-vars
 function describeTimeItem(timeItem) {
   const timeItemDescription: {
     generalFeedback: object,
@@ -427,7 +430,6 @@ function describeTimeItem(timeItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/checkbox-grid-item
-// eslint-disable-next-line no-unused-vars
 function describeCheckboxGridItem(checkboxGridItem) {
   const checkboxGridItemDescription: {
     columns: Array<string>,
@@ -449,6 +451,64 @@ function describeCheckboxGridItem(checkboxGridItem) {
     isRequired: checkboxGridItem.isRequired(),
   };
   return checkboxGridItemDescription;
+}
+
+function describeItem(item) {
+  const itemType = item.getType();
+  switch (itemType) {
+    case 'CHECKBOX':
+      return describeCheckboxItem(item.asCheckboxItem());
+    case 'CHECKBOX_GRID':
+      return describeCheckboxGridItem(item.asCheckboxGridItem());
+    case 'DATE':
+      return describeDateItem(item.asDateItem());
+    case 'DATETIME':
+      return describeDateTimeItem(item.asDateTimeItem());
+    case 'DURATION':
+      return describeDurationItem(item.asDurationItem());
+    case 'GRID':
+      return describeGridItem(item.asGridItem());
+    case 'IMAGE':
+      return describeImageItem(item.asImageItem());
+    case 'LIST':
+      return describeListItem(item.asListItem());
+    case 'MULTIPLE_CHOICE':
+      return describeMultipleChoiceItem(item.asMultipleChoiceItem());
+    case 'PAGE_BREAK':
+      return describePageBreakItem(item.asPageBreakItem());
+    case 'PARAGRAPH_TEXT':
+      return describeParagraphTextItem(item.asParagraphTextItem());
+    case 'SCALE':
+      return describeScaleItem(item.asScaleItem());
+    case 'SECTION_HEADER':
+      return describeSectionHeaderItem(item.asSectionHeaderItem());
+    case 'TEXT':
+      return describeTextItem(item.asTextItem());
+    case 'TIME':
+      return describeTimeItem(item.asTimeItem());
+    default:
+      return {
+        helpText: item.getHelpText(),
+        id: item.getId(),
+        index: item.getIndex(),
+        title: item.getTitle(),
+        type: item.getType(),
+      };
+  }
+}
+
+function describeActiveForm() {
+  const activeForm = FormApp.getActiveForm();
+  return {
+    ...describeForm(activeForm),
+    items: activeForm.getItems().map(item => describeItem(item)),
+  };
+}
+
+// eslint-disable-next-line no-unused-vars
+function makeFormOffline() {
+  const activeFormDescription = describeActiveForm();
+  return activeFormDescription;
 }
 
 export function displayMenu() {
