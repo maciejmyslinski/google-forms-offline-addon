@@ -497,20 +497,11 @@ function describeItem(item) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 function describeActiveForm() {
   const activeForm = FormApp.getActiveForm();
   return {
     ...describeForm(activeForm),
     items: activeForm.getItems().map(item => describeItem(item)),
   };
-}
-
-// eslint-disable-next-line no-unused-vars
-function makeFormOffline() {
-  const activeFormDescription = describeActiveForm();
-  return activeFormDescription;
-}
-
-export function displayMenu() {
-  FormApp.getUi().createAddonMenu().addItem('Make this form offline', 'makeFormOffline').addToUi();
 }
