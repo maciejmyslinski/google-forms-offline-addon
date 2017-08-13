@@ -101,7 +101,6 @@ function describeQuizFeedback(quizFeedback) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/checkbox-item
-// eslint-disable-next-line no-unused-vars
 function describeCheckboxItem(checkboxItem) {
   const checkboxDescription: {
     helpText: string,
@@ -132,7 +131,6 @@ function describeCheckboxItem(checkboxItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/date-item
-// eslint-disable-next-line no-unused-vars
 function describeDateItem(dateItem) {
   const dateItemDescription: {
     generalFeedback: object,
@@ -159,14 +157,12 @@ function describeDateItem(dateItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/date-time-item
-// eslint-disable-next-line no-unused-vars
 function describeDateTimeItem(dateTimeItem) {
   // dateTimeItem looks exactly the same as dateItem
   return describeDateItem(dateTimeItem);
 }
 
 // see https://developers.google.com/apps-script/reference/forms/duration-item
-// eslint-disable-next-line no-unused-vars
 function describeDurationItem(durationItem) {
   const durationItemDescription: {
     generalFeedback: object,
@@ -191,7 +187,6 @@ function describeDurationItem(durationItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/grid-item
-// eslint-disable-next-line no-unused-vars
 function describeGridItem(gridItem) {
   const gridItemDescription: {
     columns: Array<string>,
@@ -234,7 +229,6 @@ function describeBlob(blob) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/image-item
-// eslint-disable-next-line no-unused-vars
 function describeImageItem(imageItem) {
   const imageItemDescription: {
     aligment: string,
@@ -259,7 +253,6 @@ function describeImageItem(imageItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/list-item
-// eslint-disable-next-line no-unused-vars
 function describeListItem(listItem) {
   const listItemDescription: {
     choices: Array<object>,
@@ -288,7 +281,6 @@ function describeListItem(listItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/multiple-choice-item
-// eslint-disable-next-line no-unused-vars
 function describeMultipleChoiceItem(multipleChoiceItem) {
   const multipleChoiceItemDescription: {
     choices: Array<object>,
@@ -344,7 +336,6 @@ function describeParagraphTextItem(paragraphTextItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/scale-item
-// eslint-disable-next-line no-unused-vars
 function describeScaleItem(scaleItem) {
   const scaleItemDescription: {
     leftLabel: string,
@@ -373,7 +364,6 @@ function describeScaleItem(scaleItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/section-header-item
-// eslint-disable-next-line no-unused-vars
 function describeSectionHeaderItem(sectionHeaderItem) {
   const sectionHeaderItemDescription: {
     helpText: string,
@@ -392,7 +382,6 @@ function describeSectionHeaderItem(sectionHeaderItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/text-item
-// eslint-disable-next-line no-unused-vars
 function describeTextItem(textItem) {
   const textItemDescription: {
     generalFeedback: object,
@@ -417,7 +406,6 @@ function describeTextItem(textItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/time-item
-// eslint-disable-next-line no-unused-vars
 function describeTimeItem(timeItem) {
   const timeItemDescription: {
     generalFeedback: object,
@@ -442,7 +430,6 @@ function describeTimeItem(timeItem) {
 }
 
 // see https://developers.google.com/apps-script/reference/forms/checkbox-grid-item
-// eslint-disable-next-line no-unused-vars
 function describeCheckboxGridItem(checkboxGridItem) {
   const checkboxGridItemDescription: {
     columns: Array<string>,
@@ -490,10 +477,15 @@ function describeItem(item) {
     case 'PAGE_BREAK':
       return describePageBreakItem(item.asPageBreakItem());
     case 'PARAGRAPH_TEXT':
+      return describeParagraphTextItem(item.asParagraphTextItem());
     case 'SCALE':
+      return describeScaleItem(item.asScaleItem());
     case 'SECTION_HEADER':
+      return describeSectionHeaderItem(item.asSectionHeaderItem());
     case 'TEXT':
+      return describeTextItem(item.asTextItem());
     case 'TIME':
+      return describeTimeItem(item.asTimeItem());
     default:
       return {
         helpText: item.getHelpText(),
@@ -505,7 +497,6 @@ function describeItem(item) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
 function describeActiveForm() {
   const activeForm = FormApp.getActiveForm();
   return {
