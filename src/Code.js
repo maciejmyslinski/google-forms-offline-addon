@@ -3,8 +3,7 @@
 // this function is used by an menu item
 // eslint-disable-next-line no-unused-vars
 function makeFormOffline() {
-  const activeFormDescription = app.describeActiveForm();
-  Logger.log(activeFormDescription);
+  app.doOnOpen();
 }
 
 function onOpen() {

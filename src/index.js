@@ -1,6 +1,7 @@
 // @flow
-import { displayMenu } from './utils/utils';
+import { describeActiveForm } from './utils/utils';
 
 export function doOnOpen() {
-  displayMenu();
+  const activeFormDescription = describeActiveForm();
+  Logger.log(activeFormDescription);
 }
