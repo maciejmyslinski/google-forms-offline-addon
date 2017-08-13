@@ -1,13 +1,12 @@
 // @flow
 
-// eslint-disable-next-line no-unused-vars
-function describeActiveForm() {
-  const activeForm = FormApp.getActiveForm();
+// see https://developers.google.com/apps-script/reference/forms/form
+function describeForm(form) {
   const formDescription: {
     canEditResponse: boolean,
     collectsEmail: boolean,
     confirmationMessage: string,
-    closedFormMessage: string,
+    customClosedFormMessage: string,
     description: string,
     destinationId: string,
     editUrl: string,
@@ -26,34 +25,29 @@ function describeActiveForm() {
     requiresLogin: boolean,
     shortenFormUrl: string,
   } = {
-    canEditResponse: activeForm.canEditResponse(),
-    collectsEmail: activeForm.collectsEmail(),
-    confirmationMessage: activeForm.getConfirmationMessage(),
-    customClosedFormMessage: activeForm.getCustomClosedFormMessage(),
-    description: activeForm.getDescription(),
-    destinationId: activeForm.getDestinationId(),
-    editUrl: activeForm.getEditUrl(),
-    editors: activeForm.getEditors().map(user => user.getEmail()),
-    id: activeForm.getId(),
-    publishedUrl: activeForm.getPublishedUrl(),
-    shuffleQuestions: activeForm.getShuffleQuestions(),
-    summaryUrl: activeForm.getSummaryUrl(),
-    title: activeForm.getTitle(),
-    hasLimitOneResponsePerUser: activeForm.hasLimitOneResponsePerUser(),
-    hasProgressBar: activeForm.hasProgressBar(),
-    hasResponseAgainLink: activeForm.hasResponseAgainLink(),
-    isAcceptingResponses: activeForm.isAcceptingResponses(),
-    isPublishingSummary: activeForm.isPublishingSummary(),
-    isQuiz: activeForm.isQuiz(),
-    requiresLogin: activeForm.requiresLogin(),
-    shortenFormUrl: activeForm.shortenFormUrl(),
+    canEditResponse: form.canEditResponse(),
+    collectsEmail: form.collectsEmail(),
+    confirmationMessage: form.getConfirmationMessage(),
+    customClosedFormMessage: form.getCustomClosedFormMessage(),
+    description: form.getDescription(),
+    destinationId: form.getDestinationId(),
+    editUrl: form.getEditUrl(),
+    editors: form.getEditors().map(user => user.getEmail()),
+    id: form.getId(),
+    publishedUrl: form.getPublishedUrl(),
+    shuffleQuestions: form.getShuffleQuestions(),
+    summaryUrl: form.getSummaryUrl(),
+    title: form.getTitle(),
+    hasLimitOneResponsePerUser: form.hasLimitOneResponsePerUser(),
+    hasProgressBar: form.hasProgressBar(),
+    hasResponseAgainLink: form.hasResponseAgainLink(),
+    isAcceptingResponses: form.isAcceptingResponses(),
+    isPublishingSummary: form.isPublishingSummary(),
+    isQuiz: form.isQuiz(),
+    requiresLogin: form.requiresLogin(),
+    shortenFormUrl: form.shortenFormUrl(),
   };
   return formDescription;
-}
-
-// eslint-disable-next-line no-unused-vars
-function makeFormOffline() {
-  describeActiveForm();
 }
 
 // see https://developers.google.com/apps-script/reference/forms/page-break-item
@@ -449,6 +443,60 @@ function describeCheckboxGridItem(checkboxGridItem) {
     isRequired: checkboxGridItem.isRequired(),
   };
   return checkboxGridItemDescription;
+}
+
+function describeItem(item) {
+  const itemType = item.getType();
+  switch (itemType) {
+    case 'CHECKBOX':
+      return describeCheckboxItem(item.asCheckboxItem());
+    case 'CHECKBOX_GRID':
+      return describeCheckboxGridItem(item.asCheckboxGridItem());
+    case 'DATE':
+      return describeDateItem(item.asDateItem());
+    case 'DATETIME':
+      return describeDateTimeItem(item.asDateTimeItem());
+    case 'DURATION':
+      return describeDurationItem(item.asDurationItem());
+    case 'GRID':
+      return describeGridItem(item.asGridItem());
+    case 'IMAGE':
+      return describeImageItem(item.asImageItem());
+    case 'LIST':
+      return describeListItem(item.asListItem());
+    case 'MULTIPLE_CHOICE':
+      return describeMultipleChoiceItem(item.asMultipleChoiceItem());
+    case 'PAGE_BREAK':
+      return describePageBreakItem(item.asPageBreakItem());
+    case 'PARAGRAPH_TEXT':
+    case 'SCALE':
+    case 'SECTION_HEADER':
+    case 'TEXT':
+    case 'TIME':
+    default:
+      return {
+        helpText: item.getHelpText(),
+        id: item.getId(),
+        index: item.getIndex(),
+        title: item.getTitle(),
+        type: item.getType(),
+      };
+  }
+}
+
+// eslint-disable-next-line no-unused-vars
+function describeActiveForm() {
+  const activeForm = FormApp.getActiveForm();
+  return {
+    ...describeForm(activeForm),
+    items: activeForm.getItems().map(item => describeItem(item)),
+  };
+}
+
+// eslint-disable-next-line no-unused-vars
+function makeFormOffline() {
+  const activeFormDescription = describeActiveForm();
+  return activeFormDescription;
 }
 
 export function displayMenu() {
