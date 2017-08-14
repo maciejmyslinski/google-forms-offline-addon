@@ -30,7 +30,7 @@ function describeForm(form) {
     confirmationMessage: form.getConfirmationMessage(),
     customClosedFormMessage: form.getCustomClosedFormMessage(),
     description: form.getDescription(),
-    destinationId: form.getDestinationId(),
+    destinationId: form.getDestinationType() ? form.getDestinationId() : undefined,
     editUrl: form.getEditUrl(),
     editors: form.getEditors().map(user => user.getEmail()),
     id: form.getId(),
