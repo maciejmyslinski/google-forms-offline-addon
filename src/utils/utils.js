@@ -17,7 +17,7 @@ function describeForm(form) {
     title: string,
     hasLimitOneResponsePerUser: boolean,
     hasProgressBar: boolean,
-    hasResponseAgainLink: boolean,
+    hasRespondAgainLink: boolean,
     isAcceptingResponses: boolean,
     isPublishingSummary: boolean,
     isQuiz: boolean,
@@ -38,12 +38,12 @@ function describeForm(form) {
     title: form.getTitle(),
     hasLimitOneResponsePerUser: form.hasLimitOneResponsePerUser(),
     hasProgressBar: form.hasProgressBar(),
-    hasResponseAgainLink: form.hasResponseAgainLink(),
+    hasRespondAgainLink: form.hasRespondAgainLink(),
     isAcceptingResponses: form.isAcceptingResponses(),
     isPublishingSummary: form.isPublishingSummary(),
     isQuiz: form.isQuiz(),
     requiresLogin: form.requiresLogin(),
-    shortenFormUrl: form.shortenFormUrl(),
+    shortenFormUrl: form.shortenFormUrl(form.getPublishedUrl()),
   };
   return formDescription;
 }
