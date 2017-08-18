@@ -2,6 +2,7 @@
 
 // see https://developers.google.com/apps-script/reference/forms/form
 function describeForm(form) {
+  if (!form) return;
   const formDescription: {
     canEditResponse: boolean,
     collectsEmail: boolean,
@@ -30,7 +31,7 @@ function describeForm(form) {
     customClosedFormMessage: form.getCustomClosedFormMessage(),
     description: form.getDescription(),
     editUrl: form.getEditUrl(),
-    editors: form.getEditors().map(user => user.getEmail()),
+    editors: form.getEditors().map(user => (user ? user.getEmail() : undefined)),
     id: form.getId(),
     publishedUrl: form.getPublishedUrl(),
     shuffleQuestions: form.getShuffleQuestions(),
@@ -50,6 +51,7 @@ function describeForm(form) {
 
 // see https://developers.google.com/apps-script/reference/forms/page-break-item
 function describePageBreakItem(pageBreakItem) {
+  if (!pageBreakItem) return;
   const pageBreakItemDescription: {
     goToPage: number,
     helpText: string,
@@ -72,6 +74,7 @@ function describePageBreakItem(pageBreakItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/choice
 function describeChoice(choice) {
+  if (!choice) return;
   const choiceDescription: {
     gotoPage: object,
     pageNavigationType: 'CONTINUE' | 'GO_TO_PAGE' | 'RESTART' | 'SUBMIT',
@@ -88,7 +91,7 @@ function describeChoice(choice) {
 
 // see https://developers.google.com/apps-script/reference/forms/quiz-feedback
 function describeQuizFeedback(quizFeedback) {
-  if (!quizFeedback) return {};
+  if (!quizFeedback) return;
   const quizFeedbackDescription: {
     text: string,
     linkUrls: Array<string>,
@@ -101,6 +104,7 @@ function describeQuizFeedback(quizFeedback) {
 
 // see https://developers.google.com/apps-script/reference/forms/checkbox-item
 function describeCheckboxItem(checkboxItem) {
+  if (!checkboxItem) return;
   const checkboxDescription: {
     helpText: string,
     id: number,
@@ -122,7 +126,7 @@ function describeCheckboxItem(checkboxItem) {
     points: checkboxItem.getPoints(),
     hasOtherOption: checkboxItem.hasOtherOption(),
     isRequired: checkboxItem.isRequired(),
-    choices: checkboxItem.getChoices().map(choice => describeChoice(choice)),
+    choices: checkboxItem.getChoices().map(choice => (choice ? describeChoice(choice) : undefined)),
     feedbackForCorrect: describeQuizFeedback(checkboxItem.getFeedbackForCorrect()),
     feedbackForIncorrect: describeQuizFeedback(checkboxItem.getFeedbackForIncorrect()),
   };
@@ -131,6 +135,7 @@ function describeCheckboxItem(checkboxItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/date-item
 function describeDateItem(dateItem) {
+  if (!dateItem) return;
   const dateItemDescription: {
     generalFeedback: object,
     helpText: string,
@@ -157,12 +162,14 @@ function describeDateItem(dateItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/date-time-item
 function describeDateTimeItem(dateTimeItem) {
+  if (!dateTimeItem) return;
   // dateTimeItem looks exactly the same as dateItem
   return describeDateItem(dateTimeItem);
 }
 
 // see https://developers.google.com/apps-script/reference/forms/duration-item
 function describeDurationItem(durationItem) {
+  if (!durationItem) return;
   const durationItemDescription: {
     generalFeedback: object,
     helpText: string,
@@ -187,6 +194,7 @@ function describeDurationItem(durationItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/grid-item
 function describeGridItem(gridItem) {
+  if (!gridItem) return;
   const gridItemDescription: {
     columns: Array<string>,
     helpText: string,
@@ -211,6 +219,7 @@ function describeGridItem(gridItem) {
 
 // see https://developers.google.com/apps-script/reference/base/blob
 function describeBlob(blob) {
+  if (!blob) return;
   const blobDescription: {
     bytes: Array,
     contentType: string,
@@ -229,6 +238,7 @@ function describeBlob(blob) {
 
 // see https://developers.google.com/apps-script/reference/forms/image-item
 function describeImageItem(imageItem) {
+  if (!imageItem) return;
   const imageItemDescription: {
     aligment: string,
     helpText: string,
@@ -253,6 +263,7 @@ function describeImageItem(imageItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/list-item
 function describeListItem(listItem) {
+  if (!listItem) return;
   const listItemDescription: {
     choices: Array<object>,
     feedbackForCorrect: object,
@@ -265,7 +276,7 @@ function describeListItem(listItem) {
     type: string,
     isRequired: boolean,
   } = {
-    choices: listItem.getChoices().map(choice => describeChoice(choice)),
+    choices: listItem.getChoices().map(choice => (choice ? describeChoice(choice) : undefined)),
     feedbackForCorrect: describeQuizFeedback(listItem.getFeedbackForCorrect()),
     feedbackForIncorrect: describeQuizFeedback(listItem.getFeedbackForIncorrect()),
     helpText: listItem.getHelpText(),
@@ -281,6 +292,7 @@ function describeListItem(listItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/multiple-choice-item
 function describeMultipleChoiceItem(multipleChoiceItem) {
+  if (!multipleChoiceItem) return;
   const multipleChoiceItemDescription: {
     choices: Array<object>,
     feedbackForCorrect: object,
@@ -294,7 +306,9 @@ function describeMultipleChoiceItem(multipleChoiceItem) {
     hasOtherOption: boolean,
     isRequired: boolean,
   } = {
-    choices: multipleChoiceItem.getChoices().map(choice => describeChoice(choice)),
+    choices: multipleChoiceItem
+      .getChoices()
+      .map(choice => (choice ? describeChoice(choice) : undefined)),
     feedbackForCorrect: describeQuizFeedback(multipleChoiceItem.getFeedbackForCorrect()),
     feedbackForIncorrect: describeQuizFeedback(multipleChoiceItem.getFeedbackForIncorrect()),
     helpText: multipleChoiceItem.getHelpText(),
@@ -312,6 +326,7 @@ function describeMultipleChoiceItem(multipleChoiceItem) {
 // see https://developers.google.com/apps-script/reference/forms/paragraph-text-item
 // eslint-disable-next-line no-unused-vars
 function describeParagraphTextItem(paragraphTextItem) {
+  if (!paragraphTextItem) return;
   const paragraphTextItemDescription: {
     generalFeedback: object,
     helpText: string,
@@ -336,6 +351,7 @@ function describeParagraphTextItem(paragraphTextItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/scale-item
 function describeScaleItem(scaleItem) {
+  if (!scaleItem) return;
   const scaleItemDescription: {
     leftLabel: string,
     lowerBound: number,
@@ -364,6 +380,7 @@ function describeScaleItem(scaleItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/section-header-item
 function describeSectionHeaderItem(sectionHeaderItem) {
+  if (!sectionHeaderItem) return;
   const sectionHeaderItemDescription: {
     helpText: string,
     id: number,
@@ -382,6 +399,7 @@ function describeSectionHeaderItem(sectionHeaderItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/text-item
 function describeTextItem(textItem) {
+  if (!textItem) return;
   const textItemDescription: {
     generalFeedback: object,
     helpText: string,
@@ -406,6 +424,7 @@ function describeTextItem(textItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/time-item
 function describeTimeItem(timeItem) {
+  if (!timeItem) return;
   const timeItemDescription: {
     generalFeedback: object,
     helpText: string,
@@ -430,6 +449,7 @@ function describeTimeItem(timeItem) {
 
 // see https://developers.google.com/apps-script/reference/forms/checkbox-grid-item
 function describeCheckboxGridItem(checkboxGridItem) {
+  if (!checkboxGridItem) return;
   const checkboxGridItemDescription: {
     columns: Array<string>,
     helpText: string,
@@ -453,6 +473,7 @@ function describeCheckboxGridItem(checkboxGridItem) {
 }
 
 function describeItem(item) {
+  if (!item) return;
   const itemType = item.getType();
   switch (itemType) {
     case FormApp.ItemType.CHECKBOX:
