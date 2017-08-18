@@ -1,5 +1,64 @@
 // @flow
 
+function convertEnumToString(enumeration) {
+  switch (enumeration) {
+    case FormApp.Alignment.LEFT:
+      return 'LEFT';
+    case FormApp.Alignment.CENTER:
+      return 'CENTER';
+    case FormApp.Alignment.RIGHT:
+      return 'RIGHT';
+    case FormApp.DestinationType.SPREADSHEET:
+      return 'SPREADSHEET';
+    case FormApp.FeedbackType.CORRECT:
+      return 'CORRECT';
+    case FormApp.FeedbackType.INCORRECT:
+      return 'INCORRECT';
+    case FormApp.FeedbackType.GENERAL:
+      return 'GENERAL';
+    case FormApp.ItemType.CHECKBOX:
+      return 'CHECKBOX';
+    case FormApp.ItemType.CHECKBOX_GRID:
+      return 'CHECKBOX_GRID';
+    case FormApp.ItemType.DATE:
+      return 'DATE';
+    case FormApp.ItemType.DATETIME:
+      return 'DATETIME';
+    case FormApp.ItemType.DURATION:
+      return 'DURATION';
+    case FormApp.ItemType.GRID:
+      return 'GRID';
+    case FormApp.ItemType.IMAGE:
+      return 'IMAGE';
+    case FormApp.ItemType.LIST:
+      return 'LIST';
+    case FormApp.ItemType.MULTIPLE_CHOICE:
+      return 'MULTIPLE_CHOICE';
+    case FormApp.ItemType.PAGE_BREAK:
+      return 'PAGE_BREAK';
+    case FormApp.ItemType.PARAGRAPH_TEXT:
+      return 'PARAGRAPH_TEXT';
+    case FormApp.ItemType.SCALE:
+      return 'SCALE';
+    case FormApp.ItemType.SECTION_HEADER:
+      return 'SECTION_HEADER';
+    case FormApp.ItemType.TEXT:
+      return 'TEXT';
+    case FormApp.ItemType.TIME:
+      return 'TIME';
+    case FormApp.PageNavigationType.CONTINUE:
+      return 'CONTINUE';
+    case FormApp.PageNavigationType.GO_TO_PAGE:
+      return 'GO_TO_PAGE';
+    case FormApp.PageNavigationType.RESTART:
+      return 'RESTART';
+    case FormApp.PageNavigationType.SUBMIT:
+      return 'SUBMIT';
+    default:
+      return undefined;
+  }
+}
+
 // see https://developers.google.com/apps-script/reference/forms/form
 function describeForm(form) {
   if (!form) return;
@@ -65,9 +124,9 @@ function describePageBreakItem(pageBreakItem) {
     helpText: pageBreakItem.getHelpText(),
     id: pageBreakItem.getId(),
     index: pageBreakItem.getIndex(),
-    pageNavigationType: pageBreakItem.getPageNavigationType(),
+    pageNavigationType: convertEnumToString(pageBreakItem.getPageNavigationType()),
     title: pageBreakItem.getTitle(),
-    type: pageBreakItem.getType(),
+    type: convertEnumToString(pageBreakItem.getType()),
   };
   return pageBreakItemDescription;
 }
@@ -82,7 +141,7 @@ function describeChoice(choice) {
     isCorrectAnswer: boolean,
   } = {
     gotoPage: describePageBreakItem(choice.getGotoPage()),
-    pageNavigationType: choice.getPageNavigationType(),
+    pageNavigationType: convertEnumToString(choice.getPageNavigationType()),
     value: choice.getValue(),
     isCorrectAnswer: choice.isCorrectAnswer(),
   };
@@ -122,7 +181,7 @@ function describeCheckboxItem(checkboxItem) {
     id: checkboxItem.getId(),
     index: checkboxItem.getIndex(),
     title: checkboxItem.getTitle(),
-    type: checkboxItem.getType(),
+    type: convertEnumToString(checkboxItem.getType()),
     points: checkboxItem.getPoints(),
     hasOtherOption: checkboxItem.hasOtherOption(),
     isRequired: checkboxItem.isRequired(),
@@ -153,7 +212,7 @@ function describeDateItem(dateItem) {
     index: dateItem.getIndex(),
     points: dateItem.getPoints(),
     title: dateItem.getTitle(),
-    type: dateItem.getType(),
+    type: convertEnumToString(dateItem.getType()),
     includesYear: dateItem.includesYear(),
     isRequired: dateItem.isRequired(),
   };
@@ -186,7 +245,7 @@ function describeDurationItem(durationItem) {
     index: durationItem.getIndex(),
     points: durationItem.getPoints(),
     title: durationItem.getTitle(),
-    type: durationItem.getType(),
+    type: convertEnumToString(durationItem.getType()),
     isRequired: durationItem.isRequired(),
   };
   return durationItemDescription;
@@ -211,7 +270,7 @@ function describeGridItem(gridItem) {
     index: gridItem.getIndex(),
     rows: gridItem.getRows(),
     title: gridItem.getTitle(),
-    type: gridItem.getType(),
+    type: convertEnumToString(gridItem.getType()),
     isRequired: gridItem.isRequired(),
   };
   return gridItemDescription;
@@ -249,13 +308,13 @@ function describeImageItem(imageItem) {
     type: string,
     width: number,
   } = {
-    aligment: imageItem.getAlignment(),
+    aligment: convertEnumToString(imageItem.getAlignment()),
     helpText: imageItem.getHelpText(),
     id: imageItem.getId(),
     image: describeBlob(imageItem.getImage()),
     index: imageItem.getIndex(),
     title: imageItem.getTitle(),
-    type: imageItem.getType(),
+    type: convertEnumToString(imageItem.getType()),
     width: imageItem.getWidth(),
   };
   return imageItemDescription;
@@ -284,7 +343,7 @@ function describeListItem(listItem) {
     index: listItem.getIndex(),
     points: listItem.getPoints(),
     title: listItem.getTitle(),
-    type: listItem.getType(),
+    type: convertEnumToString(listItem.getType()),
     isRequired: listItem.isRequired(),
   };
   return listItemDescription;
@@ -316,7 +375,7 @@ function describeMultipleChoiceItem(multipleChoiceItem) {
     index: multipleChoiceItem.getIndex(),
     points: multipleChoiceItem.getPoints(),
     title: multipleChoiceItem.getTitle(),
-    type: multipleChoiceItem.getType(),
+    type: convertEnumToString(multipleChoiceItem.getType()),
     hasOtherOption: multipleChoiceItem.hasOtherOption(),
     isRequired: multipleChoiceItem.isRequired(),
   };
@@ -343,7 +402,7 @@ function describeParagraphTextItem(paragraphTextItem) {
     index: paragraphTextItem.getIndex(),
     points: paragraphTextItem.getPoints(),
     title: paragraphTextItem.getTitle(),
-    type: paragraphTextItem.getType(),
+    type: convertEnumToString(paragraphTextItem.getType()),
     isRequired: paragraphTextItem.isRequired(),
   };
   return paragraphTextItemDescription;
@@ -371,7 +430,7 @@ function describeScaleItem(scaleItem) {
     points: scaleItem.getPoints(),
     rightLabel: scaleItem.getRightLabel(),
     title: scaleItem.getTitle(),
-    type: scaleItem.getType(),
+    type: convertEnumToString(scaleItem.getType()),
     upperBound: scaleItem.getUpperBound(),
     isRequired: scaleItem.isRequired(),
   };
@@ -392,7 +451,7 @@ function describeSectionHeaderItem(sectionHeaderItem) {
     id: sectionHeaderItem.getId(),
     index: sectionHeaderItem.getIndex(),
     title: sectionHeaderItem.getTitle(),
-    type: sectionHeaderItem.getType(),
+    type: convertEnumToString(sectionHeaderItem.getType()),
   };
   return sectionHeaderItemDescription;
 }
@@ -416,7 +475,7 @@ function describeTextItem(textItem) {
     index: textItem.getIndex(),
     points: textItem.getPoints(),
     title: textItem.getTitle(),
-    type: textItem.getType(),
+    type: convertEnumToString(textItem.getType()),
     isRequired: textItem.isRequired(),
   };
   return textItemDescription;
@@ -441,7 +500,7 @@ function describeTimeItem(timeItem) {
     index: timeItem.getIndex(),
     points: timeItem.getPoints(),
     title: timeItem.getTitle(),
-    type: timeItem.getType(),
+    type: convertEnumToString(timeItem.getType()),
     isRequired: timeItem.isRequired(),
   };
   return timeItemDescription;
@@ -466,7 +525,7 @@ function describeCheckboxGridItem(checkboxGridItem) {
     index: checkboxGridItem.getIndex(),
     rows: checkboxGridItem.getRows(),
     title: checkboxGridItem.getTitle(),
-    type: checkboxGridItem.getType(),
+    type: convertEnumToString(checkboxGridItem.getType()),
     isRequired: checkboxGridItem.isRequired(),
   };
   return checkboxGridItemDescription;
