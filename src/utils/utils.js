@@ -44,7 +44,7 @@ function describeForm(form) {
     isPublishingSummary: form.isPublishingSummary(),
     isQuiz: form.isQuiz(),
     requiresLogin: form.requiresLogin(),
-    shortenFormUrl: form.shortenFormUrl(form.getPublishedUrl()),
+    shortenFormUrl: form.getPublishedUrl() && form.shortenFormUrl(form.getPublishedUrl()),
   };
   return formDescription;
 }
@@ -61,7 +61,7 @@ function describePageBreakItem(pageBreakItem) {
     title: string,
     type: string,
   } = {
-    goToPage: pageBreakItem.getGoToPage().getId(),
+    goToPage: pageBreakItem.getGoToPage() && pageBreakItem.getGoToPage().getId(),
     helpText: pageBreakItem.getHelpText(),
     id: pageBreakItem.getId(),
     index: pageBreakItem.getIndex(),
