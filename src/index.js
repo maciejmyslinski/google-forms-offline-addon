@@ -1,4 +1,3 @@
-/* global proccess */
 // @flow
 import { describeActiveForm } from './utils/utils';
 
@@ -9,7 +8,9 @@ export function doOnOpen() {
     contentType: 'application/json',
     payload: JSON.stringify(activeFormDescription),
   };
-  const endpointUrl = `${proccess.env.stagingServerUrl}/api/v1/form-description`;
+  const scriptProperties = PropertiesService.getScriptProperties();
+  const serverUrl = scriptProperties.getProperty('SERVER_URL');
+  const endpointUrl = `${serverUrl}/api/v1/form-description`;
   const response = UrlFetchApp.fetch(endpointUrl, requestOptions);
   if (response.getResponseCode() === 200) {
     FormApp.getUi().alert('Form uploaded successfully!');
