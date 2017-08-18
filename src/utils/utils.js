@@ -88,6 +88,7 @@ function describeChoice(choice) {
 
 // see https://developers.google.com/apps-script/reference/forms/quiz-feedback
 function describeQuizFeedback(quizFeedback) {
+  if (!quizFeedback) return {};
   const quizFeedbackDescription: {
     text: string,
     linkUrls: Array<string>,
