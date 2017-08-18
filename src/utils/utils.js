@@ -454,35 +454,35 @@ function describeCheckboxGridItem(checkboxGridItem) {
 function describeItem(item) {
   const itemType = item.getType();
   switch (itemType) {
-    case 'CHECKBOX':
+    case FormApp.ItemType.CHECKBOX:
       return describeCheckboxItem(item.asCheckboxItem());
-    case 'CHECKBOX_GRID':
+    case FormApp.ItemType.CHECKBOX_GRID:
       return describeCheckboxGridItem(item.asCheckboxGridItem());
-    case 'DATE':
+    case FormApp.ItemType.DATE:
       return describeDateItem(item.asDateItem());
-    case 'DATETIME':
+    case FormApp.ItemType.DATETIME:
       return describeDateTimeItem(item.asDateTimeItem());
-    case 'DURATION':
+    case FormApp.ItemType.DURATION:
       return describeDurationItem(item.asDurationItem());
-    case 'GRID':
+    case FormApp.ItemType.GRID:
       return describeGridItem(item.asGridItem());
-    case 'IMAGE':
+    case FormApp.ItemType.IMAGE:
       return describeImageItem(item.asImageItem());
-    case 'LIST':
+    case FormApp.ItemType.LIST:
       return describeListItem(item.asListItem());
-    case 'MULTIPLE_CHOICE':
+    case FormApp.ItemType.MULTIPLE_CHOICE:
       return describeMultipleChoiceItem(item.asMultipleChoiceItem());
-    case 'PAGE_BREAK':
+    case FormApp.ItemType.PAGE_BREAK:
       return describePageBreakItem(item.asPageBreakItem());
-    case 'PARAGRAPH_TEXT':
+    case FormApp.ItemType.PARAGRAPH_TEXT:
       return describeParagraphTextItem(item.asParagraphTextItem());
-    case 'SCALE':
+    case FormApp.ItemType.SCALE:
       return describeScaleItem(item.asScaleItem());
-    case 'SECTION_HEADER':
+    case FormApp.ItemType.SECTION_HEADER:
       return describeSectionHeaderItem(item.asSectionHeaderItem());
-    case 'TEXT':
+    case FormApp.ItemType.TEXT:
       return describeTextItem(item.asTextItem());
-    case 'TIME':
+    case FormApp.ItemType.TIME:
       return describeTimeItem(item.asTimeItem());
     default:
       return {
