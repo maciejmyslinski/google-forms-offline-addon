@@ -249,7 +249,7 @@ function describeImageItem(imageItem) {
     type: string,
     width: number,
   } = {
-    aligment: imageItem.getAligment(),
+    aligment: imageItem.getAlignment(),
     helpText: imageItem.getHelpText(),
     id: imageItem.getId(),
     image: describeBlob(imageItem.getImage()),
